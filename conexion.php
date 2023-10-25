@@ -1,21 +1,11 @@
 <?php
-$host = "localhost"; // Reemplaza con el nombre del host de tu base de datos PostgreSQL
-$port = "5432"; // Puerto predeterminado de PostgreSQL
-$dbname = "futbol"; // Nombre de la base de datos
-$user = "postgres"; // Nombre de usuario de PostgreSQL
-$password = "root"; // Contraseña de PostgreSQL
-
-// Intenta establecer la conexión
-$conn = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$password");
-
-// Verifica si la conexión fue exitosa
-if (!$conn) {
-    die("Error al conectar a la base de datos: " . pg_last_error());
-}else{
-    echo("Conectado a la BD");
+try {
+    $pdo = new PDO("pgsql:host=localhost;dbname=futbol", "postgres", "root");
+    // Configura el modo de error de PDO para lanzar excepciones en caso de error
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+    // Puedes usar la variable $pdo para ejecutar consultas SQL
+} catch (PDOException $e) {
+    die("Error de conexión: " . $e->getMessage());
 }
-
-
-// Cierra la conexión cuando hayas terminado
-pg_close($conn);
 ?>

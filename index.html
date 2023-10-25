@@ -5,13 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
     <link rel="stylesheet" href="css/bootstrap.css">
+    <!-- Agrega jQuery antes de SweetAlert2 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Agrega SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-4">
-            <form>
+            <form method="POST" action="validar.php">
                 <h2 class="mb-4">Iniciar Sesión</h2>
                 <div class="mb-3">
                     <label for="username" class="form-label">Usuario</label>
@@ -21,11 +25,40 @@
                     <label for="password" class="form-label">Contraseña</label>
                     <input type="password" class="form-control" id="password" name="password" required>
                 </div>
-                <button" type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
             </form>
         </div>
     </div>
 </div>
+
+<script>
+$(document).ready(function() {
+    $("form").on("submit", function(event) {
+        event.preventDefault();
+        $.post("validar.php", $(this).serialize(), function(data) {
+            if (data.includes("Error")) {
+                // Muestra una alerta de error si el mensaje contiene "Error"
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: data,
+                });
+            } else {
+                // Muestra una alerta de éxito si no contiene "Error"
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Inicio de sesión exitoso',
+                    text: data,
+                }).then(function() {
+                    // Redirige al usuario si es necesario
+                    // window.location.href = data.rol + ".php";
+                });
+            }
+        });
+    });
+});
+
+</script>
 
 <!-- Agrega el enlace a los scripts de Bootstrap 5 (jQuery y Popper.js) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
