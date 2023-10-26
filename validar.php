@@ -1,4 +1,9 @@
 <?php
+
+// Inicia una sesión
+session_start();
+
+
 // Recuperar datos del formulario
 $username = $_POST['username'];
 $password = $_POST['password'];
@@ -8,6 +13,9 @@ $host = 'localhost';
 $database = 'futbol';
 $db_username = $username;
 $db_password = $password;
+
+$_SESSION['username'] = $username;
+$_SESSION['password'] = $password;
 
 try {
     $conn = new PDO("pgsql:host=$host;dbname=$database", $db_username, $db_password);
@@ -20,7 +28,7 @@ try {
     $message = "Inicio de sesión exitoso";
 } catch (PDOException $e) {
     $success = false;
-    $message = "Error en la conexión a la base de datos: ";
+    $message = "Error en la conexión a la base de datos: " . $e->getMessage();
 }
 
 if ($success) {
