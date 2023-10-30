@@ -8,8 +8,18 @@
     <link rel="stylesheet" href="css/custom.css"> <!-- Agrega tu archivo de estilos personalizados si es necesario -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+<style>
+    body {
+    background-image: url('img/futbol.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 100%;
+}
+
+</style>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="#">LIGA MX</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,7 +54,7 @@
     </nav>
 
     <div class="container my-5">
-        <h1 class="text-center">Bienvenido a LIGA MX</h1>
+        <h1 class="text-center" style="color: white;">BIENVENIDO A LA LIGA MX</h1>
     </div>
 
     <script>
