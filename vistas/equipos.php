@@ -168,8 +168,10 @@ if (isset($_SESSION['username'])) {
         $ciudad = $_POST['ciudad'];
         $estadio = $_POST['estadio'];
         $capacidad = $_POST['capacidad'];
-
-        if (insertEquipo($nombre, $ciudad, $estadio, $capacidad)) {
+    
+        $resultado = insertEquipo($nombre, $ciudad, $estadio, $capacidad);
+    
+        if ($resultado) {
             // Equipo insertado con éxito
             echo '<script>
                 Swal.fire({
@@ -177,20 +179,21 @@ if (isset($_SESSION['username'])) {
                     title: "Éxito",
                     text: "Equipo agregado con éxito"
                 }).then(function () {
-                    recargarPagina(); // Recargar la página después de cerrar el SweetAlert
+                    recargarPagina();
                 });
-             </script>';
+            </script>';
         } else {
             // Error al insertar el equipo
             echo '<script>
                 Swal.fire({
                     icon: "error",
                     title: "Error",
-                    text: "Hubo un problema al agregar el equipo"
+                    text: "No tienes permisos para agregar un equipo."
                 });
-             </script>';
+            </script>';
         }
     }
+    
 
 
     // Después de la consulta y antes de mostrar la tabla
@@ -213,7 +216,7 @@ if (isset($_SESSION['username'])) {
                 Swal.fire({
                     icon: "error",
                     title: "Error",
-                    text: "Hubo un problema al eliminar el equipo"
+                    text: "No tienes los permisos o hay un problema al eliminar el equipo"
                 }).then(function () {
                     recargarPagina(); // Recargar la página después de cerrar el SweetAlert
                 });
@@ -245,7 +248,7 @@ if (isset($_SESSION['username'])) {
                 Swal.fire({
                     icon: "error",
                     title: "Error",
-                    text: "Hubo un problema al actualizar el equipo"
+                    text: "No tienes los permisos o hay un problema para actualizar."
                 });
             </script>';
         }

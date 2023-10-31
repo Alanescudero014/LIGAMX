@@ -200,10 +200,12 @@ if (isset($_SESSION['username'])) {
         $nombre = $_POST['nombre'];
         $nacionalidad = $_POST['nacionalidad'];
         $posicion = $_POST['posicion'];
-        $fechaNacimiento = $_POST['fecha_nacimiento'];
-        $equipoActual = $_POST['equipo_actual'];
+        $fecha_nacimiento = $_POST['fecha_nacimiento'];
+        $equipo_actual = $_POST['equipo_actual'];
 
-        if (insertJugador($nombre, $nacionalidad, $posicion, $fechaNacimiento, $equipoActual)) {
+        $resultado = insertJugador($nombre, $nacionalidad, $posicion, $fecha_nacimiento, $equipo_actual);
+
+        if ($resultado) {
             // Jugador insertado con éxito
             echo '<script>
                 Swal.fire({
@@ -220,7 +222,7 @@ if (isset($_SESSION['username'])) {
                 Swal.fire({
                     icon: "error",
                     title: "Error",
-                    text: "Hubo un problema al agregar el jugador"
+                    text: "No tienes permisos para agregar un jugador."
                 });
             </script>';
         }
@@ -246,7 +248,7 @@ if (isset($_SESSION['username'])) {
             Swal.fire({
                 icon: "error",
                 title: "Error",
-                text: "Hubo un problema al eliminar el jugador"
+                text: "No tienes permisos para eliminar un jugador."
             }).then(function () {
                 recargarPagina();
             });
@@ -280,7 +282,7 @@ if (isset($_SESSION['username'])) {
             Swal.fire({
                 icon: "error",
                 title: "Error",
-                text: "Hubo un problema al actualizar el jugador"
+                text: "No tienes permisos para actualizar un jugador."
             });
         </script>';
         }

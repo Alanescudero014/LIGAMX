@@ -22,15 +22,16 @@ try {
     exit();
 }
 
-// Consulta SQL para insertar un equipo
-function insertEquipo($nombre, $ciudad, $estadio, $capacidad) {
+// Consulta SQL para insertar un partido
+function insertPartido($equipoLocal, $equipoVisitante, $fechaPartido, $resultado, $estadio) {
     global $conn;
-    $sql = "INSERT INTO equipos (nombre_equipo, ciudad, estadio, capacidad_estadio) VALUES (:nombre, :ciudad, :estadio, :capacidad)";
+    $sql = "INSERT INTO Partidos (Equipo_local, Equipo_visitante, Fecha_partido, Resultado, Estadio) VALUES (:equipo_local, :equipo_visitante, :fecha_partido, :resultado, :estadio)";
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':nombre', $nombre);
-    $stmt->bindParam(':ciudad', $ciudad);
+    $stmt->bindParam(':equipo_local', $equipoLocal);
+    $stmt->bindParam(':equipo_visitante', $equipoVisitante);
+    $stmt->bindParam(':fecha_partido', $fechaPartido);
+    $stmt->bindParam(':resultado', $resultado);
     $stmt->bindParam(':estadio', $estadio);
-    $stmt->bindParam(':capacidad', $capacidad);
 
     try {
         $stmt->execute();
@@ -40,15 +41,16 @@ function insertEquipo($nombre, $ciudad, $estadio, $capacidad) {
     }
 }
 
-// Consulta SQL para actualizar un equipo
-function updateEquipo($id, $nombre, $ciudad, $estadio, $capacidad) {
+// Consulta SQL para actualizar un partido
+function updatePartido($id, $equipoLocal, $equipoVisitante, $fechaPartido, $resultado, $estadio) {
     global $conn;
-    $sql = "UPDATE equipos SET nombre_equipo = :nombre, ciudad = :ciudad, estadio = :estadio, capacidad_estadio = :capacidad WHERE id_equipo = :id";
+    $sql = "UPDATE Partidos SET Equipo_local = :equipo_local, Equipo_visitante = :equipo_visitante, Fecha_partido = :fecha_partido, Resultado = :resultado, Estadio = :estadio WHERE ID_partido = :id";
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':nombre', $nombre);
-    $stmt->bindParam(':ciudad', $ciudad);
+    $stmt->bindParam(':equipo_local', $equipoLocal);
+    $stmt->bindParam(':equipo_visitante', $equipoVisitante);
+    $stmt->bindParam(':fecha_partido', $fechaPartido);
+    $stmt->bindParam(':resultado', $resultado);
     $stmt->bindParam(':estadio', $estadio);
-    $stmt->bindParam(':capacidad', $capacidad);
     $stmt->bindParam(':id', $id);
 
     try {
@@ -59,10 +61,10 @@ function updateEquipo($id, $nombre, $ciudad, $estadio, $capacidad) {
     }
 }
 
-// Consulta SQL para eliminar un equipo
-function deleteEquipo($id) {
+// Consulta SQL para eliminar un partido
+function deletePartido($id) {
     global $conn;
-    $sql = "DELETE FROM equipos WHERE id_equipo = :id";
+    $sql = "DELETE FROM Partidos WHERE ID_partido = :id";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':id', $id);
 
