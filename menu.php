@@ -1,3 +1,8 @@
+<?php
+session_start();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,8 +58,8 @@
         </div>
     </nav>
 
-    <div class="container my-5">
-        <h1 class="text-center" style="color: white;">BIENVENIDO A LA LIGA MX</h1>
+    <div class="container my-5" style="background:rgba(0, 0, 0, 0.45); color: white;">
+        <h1 class="text-center" style="color: white;">Bienvenido <?php echo $_SESSION['username'] ?> a la Liga MX</h1>
     </div>
 
     <script>
