@@ -54,10 +54,134 @@ if (isset($_SESSION['username'])) {
 </head>
 
 <body>
+<style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(#60FD00, #173D00);
+}
+
+.container {
+    border: solid 1px rgba(255, 255, 255, 0.2);
+}
+
+.spaced {
+    margin: 20px;
+}
+
+
+table {
+    color: #fff;
+    font-size: 14px;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+thead {
+    background: rgba(243, 140, 210, 0.4);
+}
+
+th {
+    padding: 20px 15px ;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+td {
+    padding: 15px;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.2);
+}
+
+
+tbody tr {
+    cursor: pointer;
+}
+
+tbody tr:hover {
+    background: rgba(243, 103, 199, 0.4);
+}
+
+input {
+ border: 1px solid #ccc;
+ border-radius: 4px;
+ padding: 10px;
+ width: 95%;
+ box-sizing: border-box;
+ margin-bottom: 6px;
+}
+
+.btn {
+            font-size: 18px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .btn:focus {
+            outline: none;
+        }
+
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.5);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.2s ease;
+        }
+
+        .btn:hover:before,
+        .btn:focus:before {
+            transform: scaleX(1);
+        }
+
+        .btn-close {
+    border: none;
+    font-size: 20px;
+    color: #fff;
+    background-color: black;
+    padding: 3px;
+    margin: 3px;
+    cursor: pointer;
+}
+
+.btn-close:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-close:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
+}
+        
+    </style>
     <header>
         <a href="../menu.php" class="btn btn-outline-dark"><i class="fa-solid fa-arrow-left"></i></a>
     </header>
-    <div class="container mt-5">
+    <div class="container spaced">
         <!-- Botón para agregar equipo (abre un modal) -->
         <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#agregarEquipoModal">
             Agregar Equipo
@@ -127,15 +251,19 @@ if (isset($_SESSION['username'])) {
     </div>
 
     <!-- Modal para Agregar Equipo -->
+    <div class="container spaced">
     <div class="modal fade" id="agregarEquipoModal" tabindex="-1" aria-labelledby="agregarEquipoModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
+                <br>
+                <br>
+                <br>
                 <!-- Contenido del formulario de agregar aquí -->
                 <form class="mi-formulario" method="POST" action="equipos.php">
                     <!-- Campos de entrada para los datos del equipo -->
                     <div class="modal-header">
                         <h5 class="modal-title" id="agregarEquipoModalLabel">Agregar Equipo</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close btn-lg" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <label for="nombre">Nombre del equipo</label>
